@@ -1,0 +1,38 @@
+.latest-match-heading {
+  font-family: 'Bree Serif';
+  font-size: 20px;
+  font-weight: 600;
+  color: #ffffff;
+}
+.latest-match-card {
+  background-color: #1e293b;
+  height: 300px;
+  width: 1100px;
+  padding: 30px;
+  border-radius: 7px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.match-info-heading {
+  font-family: 'Bree Serif';
+  font-size: 22px;
+  font-weight: 600;
+  color: #ffffff;
+}
+.match-info-items {
+  font-family: 'Bree Serif';
+  font-size: 17px;
+  font-weight: 500;
+  color: #ffffff;
+}
+.latest-match-img {
+  height: 170px;
+  width: 170px;
+}
+.match-innigs-items {
+  font-family: 'Bree Serif';
+  font-size: 17px;
+  font-weight: 500;
+  color: #ffffff;
+}

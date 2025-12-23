@@ -1,0 +1,10 @@
+.team-match-bg-container {
+  background-image: linear-gradient(to bottom, #d91c1f, #a4261d, #1e293b);
+  background-size: cover;
+  background-position: center;
+  padding: 50px;
+}
+.recent-matches-list {
+  display: flex;
+  flex-wrap: wrap;
+}
