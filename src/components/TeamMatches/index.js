@@ -1,5 +1,7 @@
 import {Component} from 'react'
+import {Link} from 'react-router-dom'
 import Loader from 'react-loader-spinner'
+import {PieChart, Pie, Cell, Legend} from 'recharts'
 import LatestMatch from '../LatestMatch'
 import MatchCard from '../MatchCard'
 import './index.css'
@@ -45,6 +47,28 @@ class TeamMatches extends Component {
     matchStatus: match.match_status,
   })
 
+  getMatchStats = recentMatches => {
+    let won = 0
+    let lost = 0
+    let drawn = 0
+
+    recentMatches.forEach(match => {
+      if (match.matchStatus === 'Won') {
+        won += 1
+      } else if (match.matchStatus === 'Lost') {
+        lost += 1
+      } else {
+        drawn += 1
+      }
+    })
+
+    return [
+      {name: 'Won', value: won},
+      {name: 'Lost', value: lost},
+      {name: 'Drawn', value: drawn},
+    ]
+  }
+
   renderTeamItemDetails = () => {
     const {teamData} = this.state
     const {teamBannerUrl, latestMatchDetails, recentMatches} = teamData
@@ -52,12 +76,41 @@ class TeamMatches extends Component {
     const {params} = match
     const {id} = params
 
+    const statsData = this.getMatchStats(recentMatches)
+    const COLORS = ['#28a745', '#dc3545', '#ffc107']
+
     return (
       <div className={`team-match-bg-container ${id.toLowerCase()}`}>
         <div className="team-banner-container">
           <img src={teamBannerUrl} alt="team banner" className="banner-img" />
         </div>
+
+        <Link to="/">
+          <button type="button" className="back-button">
+            Back
+          </button>
+        </Link>
+
         <LatestMatch latestMatchDetails={latestMatchDetails} />
+
+        <div className="pie-chart-container">
+          <h1 className="pie-chart-heading">Match Statistics</h1>
+          <PieChart width={300} height={300}>
+            <Pie
+              data={statsData}
+              cx="50%"
+              cy="50%"
+              outerRadius={100}
+              dataKey="value"
+            >
+              {statsData.map((entry, index) => (
+                <Cell key={entry.name} fill={COLORS[index]} />
+              ))}
+            </Pie>
+            <Legend />
+          </PieChart>
+        </div>
+
         <ul className="recent-matches-list">
           {recentMatches.map(eachMatch => (
             <MatchCard key={eachMatch.id} matchDetails={eachMatch} />
